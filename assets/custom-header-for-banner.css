@@ -1,0 +1,34 @@
+.header-container.sticky-header .header-wrapper{
+    padding-top: 80px !important;
+}
+
+@media (max-width: 991px) {
+    .header-container.sticky-header {
+        padding-top: 50px !important;
+    }
+    /* sidebar */
+    .mobile-nav{
+            top: 57px !important;
+        }
+        }
+
+        @media (max-width: 430px) {
+    .header-container.sticky-header {
+        padding-top: 50px !important;
+    }
+    .header.container{
+        padding-top: 30px !important;
+        }
+
+        /* sidebar */
+        .mobile-nav{
+            top: 71px !important;
+        }
+    }
+
+
+@media (max-width: 1024px) {
+    .modal-backdrop.fullscreen{
+        display: none !important;
+    }
+}

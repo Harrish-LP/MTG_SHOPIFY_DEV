@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="{{ 'custom-search-section.css' | asset_url }}">
+<script src="{{ 'custom-search.js' | asset_url }}" defer="defer"></script>
+
+<div class="custom-search-container">
+  <div class="search-section">
+    <div>
+      <form action="{{ routes.search_url }}">
+        <div class="search-bar">
+        <div class="search-bar-inner">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="feather feather-search">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <input type="text" placeholder="Search products..." name="q" value="{{ search.terms | escape }}">
+        <input type="hidden" name="type" value="product">
+          <input type="hidden" name="options[prefix]" value="last">
+          <div class="search-btn">
+            <div>
+              {% comment %} <i class="icon-search"></i> {% endcomment %}
+              <input class="search-button" type="submit" value="Search">
+            </div>
+          </div>
+        </div>
+        </div>
+      </form>
+
+      {%- assign current_date_seconds = 'now' | date: '%s' -%}
+      {%- assign days_threshold_seconds = settings.days_threshold | times: 86400 -%}
+
+      <div class="course-carousel-viewport">
+        <div class="course-tags-track">
+          {% for link in settings.collection_list_menu.links %}
+            {%- assign item_published_seconds = '' -%}
+            {%- assign item_title = link.title -%}
+            {%- assign item_url = link.url -%}
+
+            {% if link.type == 'collection_link' %}
+              {%- assign collection = link.object -%}
+              {%- assign item_published_seconds = collection.published_at | date: '%s' -%}
+              {%- assign item_title = collection.title -%}
+              {%- assign item_url = collection.url -%} 
+            {% elsif link.type == 'page_link' %}
+              {%- assign page = link.object -%}
+              {%- assign item_published_seconds = page.published_at | date: '%s' -%}
+            {% endif %}
+
+            {%- assign date_difference_seconds = current_date_seconds | minus: item_published_seconds -%}
+            
+            <a href="{{ item_url }}" class="carousel-item">
+              <div class="course-tag">
+                {% if item_published_seconds != '' and date_difference_seconds <= days_threshold_seconds %}
+                  <div class="new-badge">New!</div>
+                {% endif %}
+                <span>{{ item_title }}</span>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="carousel-nav">
+        <button class="nav-button prev"><i class="fas fa-chevron-left"></i>
+</button>
+        <button class="nav-button next"><i class="fas fa-chevron-right"></i>
+</button>
+      </div>
+    </div>
+  </div>
+</div>

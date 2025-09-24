@@ -1,0 +1,31 @@
+{% assign desc = product.description | split: '<h2' | join: '<!-- split --><h2' | split: '<!-- split -->' %}
+
+{% for product--description in desc %}
+  {% if product--description contains '</h2>' %}
+    {% assign heading = product--description | split: '</h2>' | join: '</h2><!-- split -->' | split: '<!-- split -->' %}
+    {% assign headingT = heading.first | strip_html | downcase %}
+    {% assign headingT = headingT | strip %}
+    {% if headingT contains 'course for?' %}
+      {% capture 'text--content' %}
+        <div class="custom--description additionaltext-icon">
+      <h2 class="h2 accordion__title">{{ heading | first }}</h2>
+      <div class="content">
+        {{ heading | last }}
+      </div>
+    </div>
+      {% endcapture %}
+      {{ text--content }}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+<style>
+  h2:empty{
+    display: none;
+  }
+    .custom--description {
+      border: 1px solid var(--borderclr);
+      border-radius:var(--border-radius);
+      padding: var(--padding);
+      margin-top: 10px;
+  }
+</style>

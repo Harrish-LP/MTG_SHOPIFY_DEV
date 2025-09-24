@@ -1,0 +1,282 @@
+
+{% if section.settings.section_id.size > 0 %}
+  <!-- PageFlyGlobalSection -->
+  {% render 'pagefly-main-js' %}
+  {% render 'pagefly-main-css' %}
+  {% include section.settings.section_id %}
+{% else %}
+  
+    {% if request.design_mode %}
+      <style>.pf-ph{font-size:14px!important;background:#fafafa;padding:20px;text-align:center;border:1px solid #f0f0f0;border-radius:4px;margin:15px}.pf-ph span{display:block;background:#e6f7ff;padding:8px 15px;border:1px solid #91d5ff}</style>
+      <div class="pf-ph">
+        <h3>PageFly Section</h3>
+        <span>No section selected. Please select your section from the list</span>
+      </div>
+    {% endif %}
+  
+{% endif %}
+
+{% schema %}
+{
+  "name": "PageFly Section",
+  "settings": [
+    {
+      "id": "section_id",
+      "type": "select",
+      "label": "Sections",
+      "options": [
+        {
+          "label": "Select section",
+          "value": ""
+        },
+        {
+          "label": "ComplyPlus-Contact us",
+          "value": "pf-da7aae4a"
+        },
+        {
+          "label": "RD's new template - Contact us",
+          "value": "pf-53759150"
+        },
+        {
+          "label": "About the Author - Rose Mabiza",
+          "value": "pf-411bf056"
+        },
+        {
+          "label": "LN - About the author",
+          "value": "pf-58435db5"
+        },
+        {
+          "label": "Anna Nova Galeon - Author",
+          "value": "pf-fd925eef"
+        },
+        {
+          "label": "New blog template author",
+          "value": "pf-1bf298eb"
+        },
+        {
+          "label": "New blog template references and resources",
+          "value": "pf-75bc1e08"
+        },
+        {
+          "label": "New template - ER Author",
+          "value": "pf-68f790e0"
+        },
+        {
+          "label": "references and resources",
+          "value": "pf-9f057d1a"
+        },
+        {
+          "label": "New blog template banner",
+          "value": "pf-9d32843a"
+        },
+        {
+          "label": "New blog template body",
+          "value": "pf-694e4105"
+        },
+        {
+          "label": "Our Clients",
+          "value": "pf-425f2f7c"
+        },
+        {
+          "label": "Leadership sign up 4",
+          "value": "pf-e9c51fec"
+        },
+        {
+          "label": "Leadership contact us",
+          "value": "pf-5f4e57fc"
+        },
+        {
+          "label": "Event Overview Accordion",
+          "value": "pf-b396cdd4"
+        },
+        {
+          "label": "About the Author - Anne Rodgers",
+          "value": "pf-0c2ea7eb"
+        },
+        {
+          "label": "ComplyPlus-Author RD",
+          "value": "pf-32d5fbbd"
+        },
+        {
+          "label": "Resources",
+          "value": "pf-13049997"
+        },
+        {
+          "label": "ComplyPlus-Related blogs",
+          "value": "pf-592fa9f4"
+        },
+        {
+          "label": "ComplyPlus-Body",
+          "value": "pf-0f039a0a"
+        },
+        {
+          "label": "ComplyPlus-Bannner",
+          "value": "pf-6c57488c"
+        },
+        {
+          "label": "SM1",
+          "value": "pf-857c2046"
+        },
+        {
+          "label": "AG3",
+          "value": "pf-5de79c0d"
+        },
+        {
+          "label": "AG1",
+          "value": "pf-48924da4"
+        },
+        {
+          "label": "AG",
+          "value": "pf-b6e22e20"
+        },
+        {
+          "label": "LW - Contact Us",
+          "value": "pf-a756cc5f"
+        },
+        {
+          "label": "LW - Related blog articles",
+          "value": "pf-bc09d66c"
+        },
+        {
+          "label": "LW - Body",
+          "value": "pf-ff888177"
+        },
+        {
+          "label": "LW - Banner",
+          "value": "pf-a783ce4d"
+        },
+        {
+          "label": "BUY BUTTON",
+          "value": "pf-27494fbc"
+        },
+        {
+          "label": "SM banner",
+          "value": "pf-93cfb6f6"
+        },
+        {
+          "label": "Landing Pages Contact us",
+          "value": "pf-895828c7"
+        },
+        {
+          "label": "Landing Pages Banner",
+          "value": "pf-f7974d1d"
+        },
+        {
+          "label": "New RD Related blog articles",
+          "value": "pf-be0da26e"
+        },
+        {
+          "label": "Jaden 2",
+          "value": "pf-79a77623"
+        },
+        {
+          "label": "Jaden 4th Last section",
+          "value": "pf-0e7ce476"
+        },
+        {
+          "label": "Jaden 3rd Body",
+          "value": "pf-4e4f1f3d"
+        },
+        {
+          "label": "Jaden 2nd Banner",
+          "value": "pf-05307ca4"
+        },
+        {
+          "label": "Jaden 1st Navigation",
+          "value": "pf-f709e885"
+        },
+        {
+          "label": "MTG Section form",
+          "value": "pf-b4c84540"
+        },
+        {
+          "label": "Jaden Back to Main blog",
+          "value": "pf-d228904b"
+        },
+        {
+          "label": "Leadership Section",
+          "value": "pf-1ee5dda1"
+        },
+        {
+          "label": "Free courses",
+          "value": "pf-87c6bfbc"
+        },
+        {
+          "label": "Section ni RD",
+          "value": "pf-9004629c"
+        },
+        {
+          "label": "Rose's Header",
+          "value": "pf-be3de5a2"
+        },
+        {
+          "label": "JMS LANDING PAGE",
+          "value": "pf-767c45da"
+        },
+        {
+          "label": "Related blog",
+          "value": "pf-9f16305a"
+        },
+        {
+          "label": "CONTACT US",
+          "value": "pf-4c1a9477"
+        },
+        {
+          "label": "RD Section",
+          "value": "pf-7232774e"
+        },
+        {
+          "label": "Last Section 2 - JMS",
+          "value": "pf-31351d1e"
+        },
+        {
+          "label": "Last Sections - JMS",
+          "value": "pf-ce03a2f0"
+        },
+        {
+          "label": "Body - JMS",
+          "value": "pf-1fe1564d"
+        },
+        {
+          "label": "Title Section - JMS",
+          "value": "pf-a53f2f25"
+        },
+        {
+          "label": "Landing page regular header",
+          "value": "pf-7885dfed"
+        },
+        {
+          "label": "RD Blog Header",
+          "value": "pf-74b762b5"
+        },
+        {
+          "label": "RD Inner Blog Header",
+          "value": "pf-4fbeb370"
+        },
+        {
+          "label": "Social Media JMS",
+          "value": "pf-f602bedd"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "Find and edit your section on the [section listing](https://regal-training.myshopify.com/admin/apps/pagefly/sections)"
+    },
+    {
+      "type": "paragraph",
+      "content": "To add block to a section, please use the App Block element on PageFly section editor."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "PageFly Section"
+    }
+  ]
+}
+{% endschema %}

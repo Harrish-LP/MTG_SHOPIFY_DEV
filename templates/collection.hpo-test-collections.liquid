@@ -1,0 +1,274 @@
+<!-- /templates/collection.liquid -->
+{%- assign limit = settings.hpo_collection_products_count | plus:0 -%} 
+<style>
+    .collection-banner {
+      position: relative;
+      background-image: url('{{ collection.metafields.custom.banner | image_url }}');
+      background-size: cover;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      padding: 30px 50px;
+      background-position: center center;
+      margin-bottom: 4rem;
+    }
+
+    .collection-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: #001633;
+      {% comment %} z-index: 1; {% endcomment %}
+      background-size: cover;
+      opacity: 0.5;
+    }
+
+    .collection-banner-content , .collection-img img{
+      position: relative;
+      {% comment %} z-index: 2; {% endcomment %}
+    }
+
+    .collection-img {
+      flex-basis: 300px;
+    }
+
+    .collection-banner h1 {
+      font-size: 33px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 44.55px
+    }
+
+    .collection-banner p {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 22.5px
+    }
+
+    @media (min-width: 767.5px) {
+      .collection-banner {
+        display: flex;
+      }
+    }
+    .collection-img img{
+		  width: 50%;
+    }
+
+    .grid-container {
+      padding-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+
+    .collection-card {
+      background: white;
+      height: 240px;
+      width: 276px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .collection-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .collection-card-title {
+      padding: 10px;
+      font-size: 17px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .shopify-buy__product__price {
+      font-size: 15px;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+      width: 250px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 999px; /* fully rounded */
+      cursor: pointer;
+      width: 100%;
+      transition: 0.3s ease;
+    }
+
+    .btn-add {
+      background-color: #00af52;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .btn-add:hover{
+    color: #0b284c;
+    }
+
+    .btn-view {
+      background-color: #05284c;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .btn-view:hover {
+      background-color: #05284c;
+      color: #22b053;
+    }
+
+    @media (max-width: 767.5px) {
+      .collection-banner {
+        background-position: center center;
+        padding-bottom: 11px;
+      }
+      .c-width, .button-container,.collection-card{
+      }
+
+      .grid-container {
+        padding: 2rem;
+      }
+
+      .collection-banner-content {
+        width: 70%;
+      }
+
+      .collection-banner-content h1 {
+        font-size: 24px;
+        line-height: 32.4px;
+
+      }
+
+      .collection-banner p{
+        font-size: 15px;
+        line-height: 22.5px;
+      }
+    }
+
+    .pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.pagination-list {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination-item a,
+.pagination-item span {
+  display: inline-block;
+  padding: 8px 14px;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
+  font-weight: 500;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.pagination-item a:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination-item.active span {
+  background-color: #001633;
+  color: #fff;
+  font-weight: bold;
+  border-color: #001633;
+}
+
+.product__price {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sale-price {
+  color: #e63900; /* Bright red */
+  font-weight: bold;
+}
+
+.original-price {
+  color: #00af52;
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+</style>
+
+<div class="collection-banner">
+  <div class="collection-banner-content">
+    <h1>{{ collection.title }}</h1>
+    <p>{{ collection.metafields.custom.short_description  }}</p>
+  </div>
+  <div class="collection-img">
+    <img 
+      src="https://cdn.shopify.com/s/files/1/0937/2788/files/40_off_0fb04fa0-775b-481c-90aa-d64b6bbb304a.png?v=1749221697&amp;width=2048" 
+      alt="{{ collection.title | escape }}">
+  </div>
+</div>
+
+<div class="grid-container">
+{% paginate collection.products by settings.collection_products_count | plus:0 -%}
+    {% for product in collection.products %}
+      <div class="c-width">
+        <div class="collection-card">
+          <img src="{{ product.featured_image | image_url}}" alt="{{ product.title | escape }}">
+        </div>
+        <div class="button-container">
+          <div class="collection-card-title"> 
+            {{ product.title |  link_to: product.url }}
+          </div>
+          <div class="product__price">
+            <span class="sale-price">£{{ product.price | money_without_currency }} + VAT</span>
+            {% if product.compare_at_price > product.price %}
+              <span class="original-price">£{{ product.compare_at_price | money_without_currency }} + VAT</span>
+            {% endif %}
+          </div>
+          {% form 'product', product %}
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+            <input class="btn btn-add" type="submit" value="Add to basket">
+          {% endform %}
+          <a href="{{ product.url }}" class="btn btn-view">View course</a>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+<nav class="pagination">
+  <ul class="pagination-list">
+    {% for part in paginate.parts -%}
+      <li class="pagination-item {% unless part.is_link %}active{% endunless %}">
+        {% if part.is_link -%}
+          <a href="{{ part.url }}">{{ part.title }}</a>
+        {%- else -%}
+          <span>{{ part.title }}</span>
+        {% endif %}
+      </li>
+    {%- endfor %}
+  </ul>
+</nav>
+{%- endpaginate %}
+

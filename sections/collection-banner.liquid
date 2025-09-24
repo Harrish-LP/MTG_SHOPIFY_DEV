@@ -1,0 +1,338 @@
+<div data-section-id="{{ section.id }}" data-section-type="collection-banner-section">
+  <style>
+    #collection-banner-{{ section.id }}, 
+    #collection-banner-{{ section.id }} h3.title-widget span.inner{background-color:{{section.settings.bg_section_color}};}
+    #collection-banner-{{ section.id }} .item a p .category_banner_content{
+      background-color: {{ section.settings.color_bg_content }};
+      color: {{ section.settings.color_text_content }};
+    }
+
+    #collection-banner-{{ section.id }}.category_banner .thumb-info-title h3 a,
+    #collection-banner-{{ section.id }}.category_banner .thumb-info-title .thumb-info-type{
+    	color: {{ section.settings.color_text_content }};
+    }
+    
+    #collection-banner-{{ section.id }} h3.title-widget{
+      color: {{ section.settings.color_title_section }};
+    }
+
+    .collection_banner .single-image {
+        display: block;
+        overflow: hidden;
+        position: relative;
+        height: 130px;
+    }
+
+    .collection_banner img {
+        height: 100%;
+        opacity: 0.8;
+        position: absolute;
+        transition: opacity 0.3s, transform 0.3s;
+        width: 100%;
+    }
+
+    .collection_banner a:hover img {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+
+    .collection_banner .figure-caption {
+        display: block;
+        height: 100%;
+        position: relative;
+        width: 100%;
+    }
+
+    .collection_banner .table-block {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+
+    .collection_banner .table-cell {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .collection_banner p {
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 0;
+        padding: 0 10px;
+    }
+  </style>
+
+{% if section.blocks.size > 0 %}
+{% assign col = 12 | divided_by: section.blocks.size %}
+{% else %}
+{% assign col = 4 %}
+{% endif %} 
+  <div id="collection-banner-{{ section.id }}" class="collection_banner" style="margin-top: {{section.settings.margin_top | remove: 'px' | append: 'px' }};margin-bottom: {{section.settings.margin_bottom | remove: 'px' | append: 'px' }};padding: {{section.settings.section_padding}};">
+    <div class="container">
+      {% if section.settings.title != blank %}
+      <h3 class="title-widget"> 
+        <span class="inner">
+          {% if settings.language_enable %}
+          <span class="lang1">{{ section.settings.title | split: '|' | first }}</span>
+          <span class="lang2">{{ section.settings.title | split: '|' | last }}</span>
+          {% else %}
+          {{ section.settings.title | split: '|' | first }}
+          {% endif %}
+        </span>
+      </h3>
+      {% endif %}
+      <div class="category-products">
+        <div class="products-grid">
+            <div class="row">
+          {% for block in section.blocks %}
+          {%- assign collection = collections[block.settings.collection] -%}
+          {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+          <div class="col-md-{{col}} col-sm-6">
+            <a href="{{ block.settings.banner_link }}" class="single-image">
+                {% if block.settings.banner_image != blank %}
+                {% assign img_url = block.settings.banner_image | img_url: '279x140' %}
+                {% else %}
+                {% assign img_url = 'img279x140.png' | asset_url  %}
+                {% endif %}
+
+                <img src="{{ img_url }}"/>
+
+                <span class="figure-caption">
+                    <span class="table-block">
+                        <span class="table-cell">
+                            {% if section.settings.use_title != blank %}
+                            <p>
+                                <span class="category_banner_content">
+                                {% if settings.language_enable %}
+                                <span class="lang1">{{ block.settings.banner_content | split: '|' | first }}</span>
+                                <span class="lang2">{{ block.settings.banner_content | split: '|' | last }}</span>
+                                {% else %}
+                                {{ block.settings.banner_content | split: '|' | first }}
+                                {% endif %}
+                                </span>
+                            </p>
+                            {% endif %}
+                        </span>
+                    </span>
+              </span>
+            </a>
+            {% if section.settings.use_title == blank %}
+            <span class="thumb-info-title">
+              <h3 class="sub-title thumb-info-inner">
+                {% if settings.language_enable %}
+                <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" {% if settings.language_enable %}data-translate="collections.general.link_title|title:{{collection_title}}" translate-item="title"{% endif %}>
+                  <span class="lang1">{{ collection.title | split: '|' | first }}</span>
+                  <span class="lang2">{{ collection.title | split: '|' | last }}</span>
+                </a>
+                {% else %}
+                <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" {% if settings.language_enable %}data-translate="collections.general.link_title|title:{{collection_title}}" translate-item="title"{% endif %}>
+                  {{ collection.title }}
+                </a>
+                {% endif %}
+              </h3>
+              <span class="thumb-info-type" {% if settings.language_enable %}data-translate="collections.general.items_with_count|count:{{collection.all_products_count}}"{% endif %}>{{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}</span>
+            </span>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Collection Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    }, 
+    {
+      "type": "color",
+      "id": "bg_section_color",
+      "label": "Section background color" 
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Section margin top",
+      "info": "40px"
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Section margin bottom",
+      "info": "40px"
+    },
+    {
+      "type": "text",
+      "id": "section_padding",
+      "label": "Section padding",
+      "info": "Set padding for section top-right-bottom-left (ex: 0 0 10px 0)"
+    }, 
+    {
+      "type" : "header",
+      "content": "Content Settings"
+    },  
+    {
+      "type": "color",
+      "id": "color_bg_content",
+      "label": "Background Content Color",
+      "default": "#000000"
+    },
+	{
+	  "type": "color",
+      "id": "color_title_section",
+      "label": "Title Color",
+      "default": "#313131"
+	},
+    {
+      "type": "color",
+      "id": "color_text_content",
+      "label": "Text Content Color",
+      "default": "#ffffff"
+    },
+    {
+      "type":"header",
+      "content":"Collection Banner"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Browse Our Collection"
+    },
+    {
+      "type": "text",
+      "id": "column",
+      "label": "Columns",
+      "default": "4"
+    }, 
+    {
+      "type": "text",
+      "id": "autoplay",
+      "label": "Slideshow",
+      "info": "Change to any integrer for example 5000 to play every 5 seconds. Leave empty to disable autoplay."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_paging",
+      "label": "Show Paging"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_nav",
+      "label": "Show Navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_prev",
+      "label": "Prev Navigation",
+      "default": "<i class=\"icon-chevron-left\"></i>"
+    },
+    {
+      "type": "text",
+      "id": "nav_next",
+      "label": "Next Navigation",
+      "default": "<i class=\"icon-chevron-right\"></i>"
+    }, 
+    {
+      "type": "text",
+      "id": "item_margin",
+      "label": "Margin",
+      "info": "Margin each item.",
+      "default": "30"
+    },
+	{
+      "type": "checkbox",
+      "id": "use_title",
+      "label": "Use Custom Title Collection?",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Category slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "banner_image",
+          "label": "Banner Image"
+        },
+        {
+          "type": "url",
+          "id": "banner_link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "banner_content",
+          "label": "Title Collection",
+          "default": "Title Collection"
+        },
+		{
+          "type": "collection",
+          "id": "collection",
+          "label": "collection"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Collection Banner",
+    "category": "Collection",
+    "settings": { 
+
+    },
+    "blocks": [ 
+      {
+        "type": "image",
+		"settings": {
+          "banner_content": "Fashion" 
+        } 
+      },
+      {
+        "type": "image",
+		"settings": {
+          "banner_content": "Electronics" 
+        } 
+      },
+      {
+        "type": "image",
+		"settings": {
+          "banner_content": "Home & Gaden" 
+        } 
+      },
+      {
+        "type": "image",
+		"settings": {
+          "banner_content": "Moto" 
+        } 
+      },
+      {
+        "type": "image",
+		"settings": {
+          "banner_content": "Kids Fashion" 
+        } 
+      },
+      {
+        "type": "image",
+		"settings": {
+          "banner_content": "Jewellery" 
+        } 
+      }
+    ]
+  }]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

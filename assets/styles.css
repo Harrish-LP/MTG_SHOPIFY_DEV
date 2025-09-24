@@ -1,0 +1,41 @@
+* {
+  margin:0;
+  padding:0;
+}
+body {
+  font-family: 'Montserrat', arial, serif;
+  line-height:1.55;
+  text-align:left;
+}
+img {
+  border:0;
+  outline:none;
+}
+a:hover, a:active { text-decoration:none; }
+:focus { outline:0; }
+.page ul, .page ol {
+  margin:0;
+  padding:0;
+}
+ul, ol { list-style:none outside none; }
+ul { padding:0; }
+ul li {
+  list-style:none;
+  padding:0;
+}
+p { line-height:24px; }
+a, i {
+  text-decoration:none;
+  -moz-transition:all 500ms ease;
+  -webkit-transition:all 500ms ease;
+  -o-transition:all 500ms ease;
+  transition:all 500ms ease;
+} 
+@media screen and (max-width:768px){
+  .logo .porto-main-logo {
+    width:50%!important;
+  }
+}
+.hs-form-39a12488-9ff6-421b-a55d-1ed4da12dec8_2553f307-4490-4895-b88d-8c7723923a90 .hs-form-field label:not(.hs-error-msg) {
+  color: #fff !important;
+}

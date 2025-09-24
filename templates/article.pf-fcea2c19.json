@@ -1,0 +1,21 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "pf-fcea2c19": {
+      "type": "pf-fcea2c19",
+      "settings": {}
+    }
+  },
+  "order": [
+    "pf-fcea2c19"
+  ],
+  "layout": "theme.pagefly"
+}

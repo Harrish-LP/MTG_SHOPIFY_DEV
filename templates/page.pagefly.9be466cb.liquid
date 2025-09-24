@@ -1,0 +1,263 @@
+<link rel="stylesheet" media="print" onload="this.media='all'" href="{{ 'pagefly.9be466cb.css' | asset_url }}">  <div style="opacity:0" class="sc-dcgxYM htkieq __pf" id="__pf"><div data-pf-type="Body" class="sc-cTApHj fVRyQa pf-1_"><div data-pf-type="Layout" class="sc-caiKgP ipNIuR pf-2_"><div data-pf-type="Section" class="sc-hUpaWb blbXGf pf-5_"><div style="--cw:1170px" class="sc-khQdMy cdJLiE"><div class="sc-bBHHQT iVWrCP pf-4_ pf-r pf-r-eh" style="--s-xs:15px" data-pf-type="Row"><div class="pf-c" style="--c-xs:12;--c-lg:12"><div data-pf-type="Column" class="sc-jObXwK cBBNUN pf-3_"><div data-pf-type="Custom.HTML" class="sc-giYgFv deECce pf-6_"><div id='product-component-1587631859318'></div>
+<script type="text/javascript">
+/*<![CDATA[*/
+(function () {
+  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+  if (window.ShopifyBuy) {
+    if (window.ShopifyBuy.UI) {
+      ShopifyBuyInit();
+    } else {
+      loadScript();
+    }
+  } else {
+    loadScript();
+  }
+  function loadScript() {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = scriptURL;
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+    script.onload = ShopifyBuyInit;
+  }
+  function ShopifyBuyInit() {
+    var client = ShopifyBuy.buildClient({
+      domain: 'regal-training.myshopify.com',
+      storefrontAccessToken: '9fb1056e9f227969a2e540d70e9e4248',
+    });
+    ShopifyBuy.UI.onReady(client).then(function (ui) {
+      ui.createComponent('product', {
+        id: '4392672526405',
+        node: document.getElementById('product-component-1587631859318'),
+        moneyFormat: 'Â£{{amount}}',
+        options: {
+  "product": {
+    "styles": {
+      "product": {
+        "@media (min-width: 601px)": {
+          "max-width": "calc(25% - 20px)",
+          "margin-left": "20px",
+          "margin-bottom": "50px"
+        }
+      },
+      "title": {
+        "color": "#050528"
+      },
+      "button": {
+        "font-family": "Open Sans, sans-serif",
+        "font-weight": "bold",
+        "color": "#fafafa",
+        ":hover": {
+          "color": "#fafafa",
+          "background-color": "#d50e0e"
+        },
+        "background-color": "#ed0f0f",
+        ":focus": {
+          "background-color": "#d50e0e"
+        },
+        "border-radius": "4px",
+        "padding-left": "33px",
+        "padding-right": "33px"
+      },
+      "price": {
+        "font-size": "22px",
+        "color": "#f20b0b"
+      },
+      "compareAt": {
+        "font-size": "18.7px",
+        "color": "#f20b0b"
+      },
+      "unitPrice": {
+        "font-size": "18.7px",
+        "color": "#f20b0b"
+      },
+      "description": {
+        "font-size": "15px"
+      }
+    },
+    "buttonDestination": "checkout",
+    "text": {
+      "button": "BUY NOW"
+    },
+    "googleFonts": [
+      "Open Sans"
+    ]
+  },
+  "productSet": {
+    "styles": {
+      "products": {
+        "@media (min-width: 601px)": {
+          "margin-left": "-20px"
+        }
+      }
+    }
+  },
+  "modalProduct": {
+    "contents": {
+      "img": false,
+      "imgWithCarousel": true,
+      "button": false,
+      "buttonWithQuantity": true
+    },
+    "styles": {
+      "product": {
+        "@media (min-width: 601px)": {
+          "max-width": "100%",
+          "margin-left": "0px",
+          "margin-bottom": "0px"
+        }
+      },
+      "button": {
+        "font-family": "Open Sans, sans-serif",
+        "font-weight": "bold",
+        "color": "#fafafa",
+        ":hover": {
+          "color": "#fafafa",
+          "background-color": "#d50e0e"
+        },
+        "background-color": "#ed0f0f",
+        ":focus": {
+          "background-color": "#d50e0e"
+        },
+        "border-radius": "4px",
+        "padding-left": "33px",
+        "padding-right": "33px"
+      }
+    },
+    "googleFonts": [
+      "Open Sans"
+    ]
+  },
+  "cart": {
+    "styles": {
+      "button": {
+        "font-family": "Open Sans, sans-serif",
+        "font-weight": "bold",
+        "color": "#fafafa",
+        ":hover": {
+          "color": "#fafafa",
+          "background-color": "#d50e0e"
+        },
+        "background-color": "#ed0f0f",
+        ":focus": {
+          "background-color": "#d50e0e"
+        },
+        "border-radius": "4px"
+      },
+      "title": {
+        "color": "#4c4c4c"
+      },
+      "header": {
+        "color": "#4c4c4c"
+      },
+      "lineItems": {
+        "color": "#4c4c4c"
+      },
+      "subtotalText": {
+        "color": "#4c4c4c"
+      },
+      "subtotal": {
+        "color": "#4c4c4c"
+      },
+      "notice": {
+        "color": "#4c4c4c"
+      },
+      "currency": {
+        "color": "#4c4c4c"
+      },
+      "close": {
+        "color": "#4c4c4c",
+        ":hover": {
+          "color": "#4c4c4c"
+        }
+      },
+      "empty": {
+        "color": "#4c4c4c"
+      },
+      "noteDescription": {
+        "color": "#4c4c4c"
+      },
+      "discountText": {
+        "color": "#4c4c4c"
+      },
+      "discountIcon": {
+        "fill": "#4c4c4c"
+      },
+      "discountAmount": {
+        "color": "#4c4c4c"
+      }
+    },
+    "googleFonts": [
+      "Open Sans"
+    ]
+  },
+  "toggle": {
+    "styles": {
+      "toggle": {
+        "font-family": "Open Sans, sans-serif",
+        "font-weight": "bold",
+        "background-color": "#ed0f0f",
+        ":hover": {
+          "background-color": "#d50e0e"
+        },
+        ":focus": {
+          "background-color": "#d50e0e"
+        }
+      },
+      "count": {
+        "color": "#fafafa",
+        ":hover": {
+          "color": "#fafafa"
+        }
+      },
+      "iconPath": {
+        "fill": "#fafafa"
+      }
+    },
+    "googleFonts": [
+      "Open Sans"
+    ]
+  },
+  "lineItem": {
+    "styles": {
+      "variantTitle": {
+        "color": "#4c4c4c"
+      },
+      "title": {
+        "color": "#4c4c4c"
+      },
+      "price": {
+        "color": "#4c4c4c"
+      },
+      "fullPrice": {
+        "color": "#4c4c4c"
+      },
+      "discount": {
+        "color": "#4c4c4c"
+      },
+      "discountIcon": {
+        "fill": "#4c4c4c"
+      },
+      "quantity": {
+        "color": "#4c4c4c"
+      },
+      "quantityIncrement": {
+        "color": "#4c4c4c",
+        "border-color": "#4c4c4c"
+      },
+      "quantityDecrement": {
+        "color": "#4c4c4c",
+        "border-color": "#4c4c4c"
+      },
+      "quantityInput": {
+        "color": "#4c4c4c",
+        "border-color": "#4c4c4c"
+      }
+    }
+  }
+},
+      });
+    });
+  }
+})();
+/*]]>*/
+</script></div></div></div></div></div></div></div></div></div><script>window.__pagefly_setting__={"baseURL":"https://apps.pagefly.io","analyticsURL":"https://analytics.pagefly.io","isBackend":false,"cdnURL":"https://cdn.pagefly.io","pageflyVersion":"3.1.2","shopDomain":"regal-training.myshopify.com","elementData":{},"pageTitle":"testtest","pageType":"page","pageId":"9be466cb-565c-4d11-b12d-d75a96712c64","lazyLoad":true,"forceByPassGoogleLightHouse":false,"imageLazyLoad":true,"useThemeJQ":false,"fontLink":"","trackingIDs":[],"shopifyProxyPath":"/a/pf_preview"};window.__pagefly_setting__.moneyFormat={{shop.money_format|json}};</script><script src="https://cdn.pagefly.io/pagefly/3.1.2/core/helper.js" defer></script>

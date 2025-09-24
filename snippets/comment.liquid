@@ -1,0 +1,82 @@
+<!-- /snippets/comment.liquid -->
+{% comment %}
+  This snippet generates the structure of a comment.
+  It is used to show not only recent comments, but also comments that were
+  just published but not yet approved.
+
+  More information:
+   - http://docs.shopify.com/themes/liquid-variables/comment
+{% endcomment %}
+
+<div class="comment">
+  <div class="comment-con">
+    <div class="profile-con">
+      <img
+        src="https://cdn.shopify.com/s/files/1/0937/2788/files/Default_Profile.png?v=1758278877"
+        alt=""
+        width="45"
+        height="45"
+      >
+    </div>
+    <div>
+      <span class="author-date comment">
+        {% capture author %}{{ comment.author }}{% endcapture %}
+        {% comment %} {% capture date %}<time datetime="{{ comment.created_at | date: '%Y-%m-%d' }}">{{ comment.created_at | date: format: 'month_day_year' }}</time>{% endcapture %} {% endcomment %}
+        {{ 'blogs.article.comment_meta_html' | t: author: author, date: date }}
+      </span>
+      <div class="rte">
+        {{ comment.content }}
+      </div>
+    </div>
+  </div>
+  <span>
+    {% capture date %}<time datetime="{{ comment.created_at | date: '%Y-%m-%d' }}">{{ comment.created_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+    {{ 'blogs.article.comment_time_html' | t: author: author, date: date }}
+  </span>
+</div>
+
+<style>
+      .author-date.comment{
+      font-size: 18px !important;
+      margin-bottom: 0px !important;
+      color: black !important;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: bold;
+      }
+
+      .author-date time{
+      font-size: 12px !important;
+      color: gray;
+      text-decoration: none;
+      }
+
+    .rte p{
+      margin-bottom: 0 !important;
+      margin-top: 0px !important;
+      }
+      div.comment{
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        background: #8080801f;
+        display: flex;
+        gap: 12px;
+      justify-content: space-between;
+      }
+
+      .profile-con{
+      min-width: 45px;
+      }
+      .profile-con img{
+        background:rgba(11, 40, 76, 0.27);
+            border-radius: 30px;
+      }
+
+      .comment-con{
+      display: flex;
+      gap: 13px;
+      align-items: center;
+      }
+</style>

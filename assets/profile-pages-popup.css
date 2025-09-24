@@ -1,0 +1,174 @@
+:root {
+    --primary-color: #007bff;
+    --background-color: #f8f9fa;
+    --text-color: #333;
+    --card-bg: #ffffff;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.2);
+    --border-radius: 12px;
+    --transition-speed: 0.3s;
+    --bounce-easing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.profile-pages-link-btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.profile-pages-link-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.profile-pages-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-speed) ease-in-out, visibility var(--transition-speed) ease-in-out;
+}
+
+.profile-pages-modal-content {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px var(--shadow-medium);
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-50px) scale(0.95);
+    opacity: 0;
+    transition: transform var(--transition-speed) var(--bounce-easing), opacity var(--transition-speed) ease-in-out;
+}
+
+/* The state class on the body remains the same */
+body.profile-pages-modal-open .profile-pages-modal-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.profile-pages-modal-open .profile-pages-modal-content {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.profile-pages-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    background-color: var(--card-bg);
+    z-index: 10;
+}
+
+.profile-pages-modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.profile-pages-close-button {
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: #aaa;
+    cursor: pointer;
+    padding: 0;
+    transition: color var(--transition-speed), transform var(--transition-speed);
+}
+
+.profile-pages-close-button:hover {
+    color: var(--text-color);
+    transform: rotate(90deg);
+}
+
+.profile-pages-modal-body {
+    padding: 1.5rem;
+}
+
+.profile-pages-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+}
+
+.profile-pages-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    background-color: #fdfdfd;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    color: var(--text-color);
+    text-decoration: none;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.profile-pages-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 20px var(--shadow-medium);
+}
+
+.profile-pages-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid white;
+    box-shadow: 0 2px 5px var(--shadow-light);
+}
+
+.profile-pages-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.profile-pages-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+@media (min-width: 600px) {
+    .profile-pages-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    .profile-pages-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

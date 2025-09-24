@@ -1,0 +1,263 @@
+<style>
+.banner_fullwidth_{{section.id}} .banner_fullwidth h3 {
+    color: {{ section.settings.text_color }};
+	font-size: 60px;
+}
+
+.banner-search-s {
+    background: #FFF !important;
+    border-right: 1px solid #F5F5F5 !important;
+    box-shadow: 0 4px 2px 0 #413f6a !important;
+    display: block !important;
+  	font-weight: bold;
+    height: 55px !important;
+    margin: 0 auto;
+    max-width: 300px !important;
+    padding-right: 30px !important;
+    vertical-align: middle !important;
+    width: 100% !important;
+}
+
+.banner-search-by-category {
+    position: relative;
+    right: 0;
+    vertical-align: middle;
+}
+
+.banner-search-by-category .input-dropdown-inner {
+    border-right: none !important;
+    height: 100%;
+}
+
+.banner-search-by-category .input-dropdown-inner > a {
+    border-top: 1px solid #FFF !important;
+    box-shadow: 0 3px 0 rgba(255, 255, 255, 0.5) !important;
+	max-width: 205px;
+  	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+  	width: 100%;
+}
+
+.banner-search-by-category .list-wrapper {
+    top: 80% !important;
+}
+
+.banner-searchsubmit {
+    background-color: #413f6a !important;
+    border-left: 1px solid #F2F2F2 !important;
+    border-radius: 0;
+    box-shadow: 0 3px 0 #333c;
+    color: #FFF !important;
+    display: inline-block;
+    height: 55px;
+    padding: 5px !important;
+    position: relative !important;
+    width: 60px !important;
+    vertical-align: middle;
+}
+  
+.banner-searchsubmit:hover {
+  	box-shadow: 0 3px 0 #333c !important;
+}
+
+#content-below-search {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+@media only screen and (min-width: 600px) {
+  .banner-search-s {
+      display: inline-block !important;
+      margin-right: -5px !important;
+      max-width: 420px !important;
+  }   
+}
+</style>
+
+<div data-section-id="{{ section.id }}" data-section-type="image-lazyload-section">
+    <div class="banner_fullwidth_{{section.id}}">
+        {% if section.settings.full_width_image != blank %}
+        {% assign full_width_image = section.settings.full_width_image | img_url: '1920x660' %}
+        {% else %}
+        {% assign full_width_image = 'img1920x660.png' | asset_url %}
+        {% endif;%}
+        <div class="banner_fullwidth banner_search_fullwidth" style="background-image:url({{ full_width_image }});background-position: center; background-repeat: no-repeat; background-size: cover;">
+            <h3>
+                {% if settings.language_enable %}
+                <span class="lang1">{{ section.settings.full_width_imag_content | split: '[lang2]' | first }}</span>
+                <span class="lang2">{{ section.settings.full_width_imag_content | split: '[lang2]' | last }}</span>
+                {% else %}
+                {{ section.settings.full_width_imag_content | split: '[lang2]' | first }}
+                {% endif %}
+            </h3>
+
+            <div class="search-extended"> 
+                <form role="search" method="get" class="searchform {% if settings.header_search_colletion != blank %}has-categories-dropdown{% endif %} {% if settings.header_ajax_search != blank %}woodmart-ajax-search{% endif %}" action="/search" data-thumbnail="1" data-price="1" data-post-type="product" data-count="15">
+                    <div>
+                        <label class="screen-reader-text" for="q"></label>
+                        <input type="text" class="s banner-search-s" {% if settings.language_enable %}data-translate="general.search.placeholder"{% endif %} placeholder="Search for courses here..." value="" name="q" autocomplete="off" style="padding-right: 55px;">
+                        <input type="hidden" name="type" value="product">
+                        
+                        {%- if settings.header_search_colletion != blank -%}
+                        
+                        <div class="search-by-category input-dropdown banner-search-by-category" {% if settings.header_search_colletion != blank %}style="display:inline-block;"{% endif %}>
+                            <div class="input-dropdown-inner shopify-scroll-content">
+                                <input type="hidden" name="product_cat" value="all">
+                                <a href="#" data-val="all" {% if settings.language_enable %}data-translate="general.search.category"{% endif %}>{{ 'general.search.category' | t }}</a>
+                               
+                                <div class="list-wrapper shopify-scroll has-scrollbar">
+                                    <ul class="shopify-scroll-content" tabindex="0">
+                                        <li style="display:none;"><a href="#" data-val="all" {% if settings.language_enable %}data-translate="general.search.category"{% endif %}>{{ 'general.search.category' | t }}</a></li>
+                                        
+                                        {%- if section.settings.select_collection == '1' -%}
+                                            {%- for collection in collections -%}
+                                            {%- if collection.products.size > 0 -%}
+                                            <li class="cat-item cat-item-{{collection.id}}">
+                                                <a href="{{collection.url}}" data-val="{{collection.title | handleize}}">
+                                                    {% if settings.language_enable %}
+                                                    <span class="lang1">{{ collection.title | split: '|' | first }}</span>
+                                                    <span class="lang2">{{ collection.title | split: '|' | last }}</span>
+                                                    {% else %}
+                                                    {{ collection.title | split: '|' | first }}
+                                                    {% endif %}
+                                                </a>
+                                            </li>
+                                            {%- endif -%}
+                                            {%- endfor -%}
+                                        {%- else -%}
+                                        {%- for block in section.blocks -%}
+                                            {%- assign collection = collections[block.settings.collection] -%} 
+                                            {%- if collection.products.size > 0 -%}
+                                            <li class="cat-item cat-item-{{collection.id}}">
+                                                <a href="{{collection.url}}" data-val="{{collection.title | handleize}}">
+                                                    {% if settings.language_enable %}
+                                                    <span class="lang1">{{ collection.title | split: '|' | first }}</span>
+                                                    <span class="lang2">{{ collection.title | split: '|' | last }}</span>
+                                                    {% else %}
+                                                    {{ collection.title | split: '|' | first }}
+                                                    {% endif %}
+                                                </a>
+                                            </li>
+                                            {%- endif -%} 	
+                                        {%- endfor -%}
+                                        {%- endif -%} 
+                                    </ul> 
+                                </div>
+                            </div>
+                        </div>
+
+                        {%- endif -%}
+                        
+                        <button type="submit" class="searchsubmit banner-searchsubmit" {% if settings.language_enable %}data-translate="general.search.submit"{% endif %}>{{ 'general.search.submit' | t }}</button>
+                    </div>
+                </form>
+
+                <div class="search-info-text"><span {% if settings.language_enable %}data-translate="general.search.info_search"{% endif %}>{{ 'general.search.info_search' | t }}</span></div>
+                
+                <div class="search-results-wrapper">
+                    <div class="shopify-scroll has-scrollbar">
+                        <div class="shopify-search-results shopify-scroll-content" tabindex="0">
+                            <div class="autocomplete-suggestions" style="position: absolute; max-height: 300px; z-index: 9999; width: 308px; display: flex;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="shopify-search-loader"></div>
+                </div>
+            </div>
+
+            <p id="content-below-search">
+                {% if settings.language_enable %}
+                <span class="lang1">{{ section.settings.full_width_imag_content2 | split: '[lang2]' | first }}</span>
+                <span class="lang2">{{ section.settings.full_width_imag_content2 | split: '[lang2]' | last }}</span>
+                {% else %}
+                {{ section.settings.full_width_imag_content2 | split: '[lang2]' | first }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Banner Search",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Color"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#ffffff"
+        },
+        {
+            "type":"header",
+            "content":"Full Width Banner"
+        },
+        {
+            "type": "image_picker",
+            "id": "full_width_image",
+            "label": "Background Image"
+        },
+        {
+            "type": "html",
+            "id": "full_width_imag_content",
+            "label": "Content",
+            "default": "Explore the best of you."
+        },
+        {
+            "type": "html",
+            "id": "full_width_imag_content2",
+            "label": "Content",
+            "default": "LEARN. DEVELOP. COMPLY."
+        },
+        {
+            "type": "radio",
+            "id": "select_collection",
+            "options": [
+                {
+                    "value": "1",
+                    "label": "Show all collection"
+                },
+                {
+                    "value": "2",
+                    "label": "Manually select collection"
+                }
+            ],
+            "label": "Select Show Collection"
+        }
+    ],
+    "blocks": [
+        {
+            "type":"collection",
+            "name":"Choose collection",
+            "settings": [
+                {
+                    "type":"collection",
+                    "id":"collection",
+                    "label":"Choose collection"
+                }
+            ]
+        }
+    ],
+    "presets": [{
+        "name": "Banner Search",
+        "category": "Banner",
+        "settings": { 
+
+        }
+    }]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,33 @@
+<div class="site-logo" style="flex-direction: row">
+  <a href="/" class="logo porto-main-logo" rel="home"> 
+    {%- if settings.header_overlap != blank and template == 'index' -%}
+      {%- if settings.logo_overlap_svg != '' -%}
+        <img src="{{ settings.logo_overlap_svg | asset_url }}" style="max-width:{{settings.logo_width | remove: 'px' | append: 'px' }};" alt="{{ image.alt | default: shop.name }}"/>
+      {%- else -%}
+        {%- if settings.logo_overlap != blank -%} 
+          <img src="{{ settings.logo_overlap | img_url: 'master' }}" alt="{{ image.alt | default: shop.name }}"/> 
+        {%- else -%}
+          {{shop.name}}
+        {%- endif -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- if settings.logo_svg != '' -%}
+      <img src="{{ settings.logo_svg | asset_url }}" style="max-width:{{settings.logo_width | remove: 'px' | append: 'px' }};" alt="{{ image.alt | default: shop.name }}"/>
+      {%- else -%}
+        {%- if settings.logo != blank -%} 
+          <img src="{{ settings.logo | img_url: 'master' }}" alt="{{ image.alt | default: shop.name }}"/> 
+        {%- else -%}
+          {{shop.name}}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
+  </a>
+  <img class="qmask" src="https://cdn.shopify.com/s/files/1/0937/2788/files/qualitymark.png?v=1669184937" alt="Skills for Health Quality Mask" style="max-width:{{settings.logo_width | remove: 'px' | append: 'px' }};">
+</div>
+<style>
+  @media screen and (max-width:370px){
+  .qmask {
+    width:50% !important;
+  }
+}
+</style>

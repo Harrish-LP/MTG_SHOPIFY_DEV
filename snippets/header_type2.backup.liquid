@@ -1,0 +1,158 @@
+<style>
+.collapsable-search .toggle-search-box {
+  display: none;
+}
+
+@media only screen and (min-width: 992px) {
+  #navigation-menu-search {
+    display: none;
+    position: absolute;
+    left: auto;
+    right: 45px;
+    top: 16px;
+    width: auto;
+  }
+
+  #navigation-menu-search .search-extended {
+    border: none;
+    border-radius: 0 !important;
+    margin-left: 0 !important;
+    max-width: 350px;
+    min-width: auto !important;
+  }
+
+  .collapsable-search .search-block {
+    display: none;
+    vertical-align: middle;
+  }
+
+  .collapsable-search .toggle-search-box {
+    color: #212c4b;
+    border-right: 2px solid #d0cfe6;
+    display: block;
+    font-size: 16px;
+    padding: 12px;
+    vertical-align: middle;
+  }
+
+  .collapsable-search.is-active .search-block,
+  .collapsable-search.is-active .toggle-search-box {
+    display: inline-block;
+  }
+
+  .collapsable-search .toggle-search-box .icon-cancel {
+    display: none;
+  }
+
+  .collapsable-search.is-active .toggle-search-box .icon-cancel {
+    display: block;
+  }
+
+  .collapsable-search.is-active .toggle-search-box .icon-search {
+    display: none;
+  }
+
+  .header-container.type2.sticky-header .header-wrapper #navigation-menu-search {
+    display: block;
+  }
+
+  .header-container.type2 .search-area {
+    margin-top: -20px;
+    position: absolute;
+    left: auto;
+    right: 85px;
+    top: 50%;
+  }
+
+  .header-container .search-area .search-extended {
+    border-radius: 0 !important;
+    margin-left: 0 !important;
+    max-width: 380px;
+  }
+
+  .header-container .search-area .search-extended input[type="text"] {
+    color: #212c4b;
+  }
+}
+</style>
+
+{% include 'header-top-bar' %}
+<div class="header container">
+  {% include 'header-logo' %}
+  <div class="cart-area">
+    {% if settings.header_custom_text != '' %}
+    <div class="custom-block"> 
+      {% if settings.language_enable %}
+      <div class="lang1">{{ settings.header_custom_text | split: '[lang2]' | first }}</div>
+      <div class="lang2">{{ settings.header_custom_text | split: '[lang2]' | last }}</div>
+      {% else %}
+      {{ settings.header_custom_text | split: '[lang2]' | first }}
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="mini-cart">
+      {% include 'header-cart' %} 
+    </div>
+  </div>
+  <div id="main-header-search" class="collapsable-search search-area show-icon-tablet">
+    <div class="search-block">
+      <a href="javascript:void(0);" class="search-icon">
+        <span><i class="icon-search"></i></span>
+      </a>
+
+      {% include 'header-search' %}
+    </div>
+
+    <a href="javascript:void(0);" class="toggle-search-box">
+      <span>
+        <i class="icon-cancel"></i>
+        <i class="icon-search"></i>
+      </span>
+    </a>
+  </div>
+  <div class="menu-icon"><a href="javascript:void(0)" title="Menu"><i class="fa fa-bars"></i></a></div>
+</div>
+<div class="header-wrapper">
+  <div class="main-nav wrapper-top-menu">   
+    <div class="container">
+      <div id="main-top-nav" class="main-top-nav"> 
+        {% include 'header-logo-sticky' %}
+        <!-- Main Menu -->
+        {% include 'main-menu' %} 
+        <!-- End Main Menu -->
+
+        <div id="navigation-menu-search" class="collapsable-search search-area show-icon-tablet">
+          <div class="search-block">
+            <a href="javascript:void(0);" class="search-icon">
+              <span><i class="icon-search"></i></span>
+            </a>
+            
+            {% include 'header-search' %}
+          </div>
+
+          <a href="javascript:void(0);" class="toggle-search-box">
+            <span>
+              <i class="icon-cancel"></i>
+              <i class="icon-search"></i>
+            </span>
+          </a>
+        </div>
+
+        <div class="mini-cart">
+          {% include 'header-cart' %} 
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
+
+<script>
+jQuery(document).ready(function () {
+  var navigationMenuSearch = jQuery(".collapsable-search");
+  var toggleSearchButton = jQuery(".toggle-search-box");
+
+  toggleSearchButton.on('click', function () {
+    navigationMenuSearch.toggleClass("is-active");
+  });
+});
+</script>

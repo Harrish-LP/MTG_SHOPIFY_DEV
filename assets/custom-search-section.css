@@ -1,0 +1,225 @@
+/* --- CSS Variables for Carousel Control --- */
+:root {
+  /* Default: Mobile */
+  --visible-items: 1;
+  --item-height: auto;
+  --gap: 10px;
+  --transition-speed: 0.3s;
+}
+
+@media (min-width: 649px) {
+  :root {
+    --visible-items: 2;
+  }
+  .search-section {
+    border-radius: 50px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  :root {
+    --visible-items: 3;
+  }
+  .search-section {
+    border-radius: 50px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+  :root {
+    --visible-items: 5;
+    --gap: 15px;
+  }
+  .search-section {
+    border-radius: 50px;
+  }
+}
+
+/* --- Main Section & Search Bar --- */
+.search-section {
+  position: relative;
+  display: block;
+  padding: 3rem;
+  background-color: rgb(5, 40, 76);
+  border-radius: 10px;
+  height: auto;
+}
+
+.search-bar {
+  display: block; /* Mobile first */
+  margin-bottom: 30px;
+}
+
+.search-bar input[type="text"] {
+  width: 100%;
+  display: inline-block;
+  border: none;
+  box-sizing: border-box;
+}
+
+.search-bar-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border-radius: 50px;
+  padding: 1px 1px 1px 15px;
+  width: 100%;
+  border: 2px #eeeeee;
+  /* default border */
+  transition: border-color 0.3s;
+}
+
+/* When input inside is focused, change border color to green */
+.search-bar-inner:has(input:focus) {
+  border-color: green;
+}
+
+/* Remove default input outline */
+.search-bar-inner input[type="text"] {
+  border: none;
+  outline: none;
+  padding: 5px;
+  flex: 1;
+}
+
+.search-btn {
+  display: flex;
+  justify-content: center;
+  background-color: #48a14d;
+  border-radius: 5rem;
+  padding: 1rem;
+  color: white;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.search-btn div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.icon-search {
+  font-size: 16px;
+}
+
+.search-button {
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+}
+
+/* --- Carousel Functional Styles --- */
+
+/* REMOVED .carousel-wrapper */
+
+.course-carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.course-tags-track {
+  display: flex;
+  gap: var(--gap);
+  transition: transform var(--transition-speed) ease;
+  will-change: transform;
+}
+
+a.carousel-item {
+  display: block;
+  text-decoration: none;
+  color: white;
+  flex-shrink: 0;
+  width: calc(
+    (100% - (var(--gap) * (var(--visible-items) - 1))) / var(--visible-items)
+  );
+}
+
+.course-tag {
+  position: relative;
+  background-color: #48a14d;
+  color: white;
+  border-radius: 20px;
+  padding: 1rem;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 100%;
+}
+
+.new-badge {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  z-index: 10;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  color: white;
+  background: #ff3333;
+  border-radius: 20px;
+}
+
+/* --- Navigation Buttons (NEW LAYOUT) --- */
+.carousel-nav {
+  display: flex !important;
+  justify-content: flex-end; /* Aligns buttons to the right */
+  gap: 0.5rem;
+  margin-top: 1rem; /* Creates space below the carousel */
+}
+
+.nav-button {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.nav-button:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* --- Responsive Adjustments --- */
+@media only screen and (min-width: 768px) {
+  .search-section {
+    padding: 5rem;
+    border-radius: 50px;
+  }
+  .search-bar {
+    display: flex;
+    gap: 4rem;
+  }
+  .search-btn {
+    margin-top: 0;
+  }
+  .course-tag {
+    padding: 1.5rem 2rem;
+  }
+}
+svg.feather.feather-search {
+  color: #082a4a;
+}

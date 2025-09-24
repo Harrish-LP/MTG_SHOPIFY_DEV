@@ -1,0 +1,21 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "pf-97c2ad9d": {
+      "type": "pf-97c2ad9d",
+      "settings": {}
+    }
+  },
+  "order": [
+    "pf-97c2ad9d"
+  ],
+  "layout": "theme.pagefly"
+}
