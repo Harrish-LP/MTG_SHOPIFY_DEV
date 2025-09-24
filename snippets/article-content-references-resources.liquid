@@ -1,1 +1,170 @@
-this is a test
+<style>
+  .References-and-resources-section.all {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  .References-and-resources-section.all .image-column {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .References-and-resources-section.all .image-column img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 15px;
+  }
+
+  .References-and-resources-section.all .text-column {
+    flex: 1;
+    max-width: 480px;
+    text-align: left;
+  }
+
+  .References-and-resources-section.all .text-column h3 {
+    margin-bottom: 20px;
+    font-family: Montserrat, sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #212b4b;
+  }
+
+  .References-and-resources-section.all .text-column a {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4a90e2ff;
+    text-decoration: underline;
+    transition: color 0.3s;
+  }
+
+  /* Tablet layout */
+  .References-and-resources-section.tablet {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  .References-and-resources-section.tablet .image-column {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .References-and-resources-section.tablet .image-column img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 15px;
+  }
+
+  .References-and-resources-section.tablet .text-column {
+    flex: 1;
+    max-width: 480px;
+    text-align: left;
+  }
+
+  .References-and-resources-section.tablet .text-column h3 {
+    font-family: Montserrat, sans-serif;
+    font-size: clamp(16px, 2vw + 1rem, 26px);
+    font-weight: 700;
+    color: #212b4b;
+  }
+
+  .References-and-resources-section.tablet .text-column a {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4a90e2ff;
+    text-decoration: underline;
+    transition: color 0.3s;
+  }
+
+  /* Mobile responsiveness */
+  @media screen and (max-width: 991px) {
+    .References-and-resources-section.all {
+      display: none;
+    }
+    .References-and-resources-section.tablet {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+  }
+</style>
+
+
+<!-- REFERENCES AND RESOURCES for desktop-->
+<div class="References-and-resources-section all">
+  <!-- LEFT COLUMN (Image) -->
+  <div class="image-column">
+    <img 
+      src="https://cdn.shopify.com/s/files/1/0937/2788/files/What_is_Mandatory_Training_-_Dr_Richard_Dune_cdeb1ba6-ea94-44e7-9c6c-c440eca3a7e8.png?v=1735910533" 
+      alt="Why Organ Donation Week 2025 Matters More Than Ever - The Mandatory Training Group UK -" 
+      title="Why Organ Donation Week 2025 Matters More Than Ever - The Mandatory Training Group UK -">
+  </div>
+
+  <!-- RIGHT COLUMN (Text) -->
+  <div class="text-column">
+    <h3 style="padding-bottom: 10px;">References &amp; Resources</h3>
+    <a href="https://www.mandatorytraining.co.uk/blogs/awareness-days/mental-health-awareness-week-2025" target="_blank">
+      <em>Mental Health Awareness Week 2025</em>
+    </a> 
+    <a href="https://www.mandatorytraining.co.uk/blogs/awareness-days/world-patient-safety-day-2025" target="_blank">
+      <em>World Patient Safety Day 2025</em>
+    </a> 
+    <a href="https://www.mandatorytraining.co.uk/blogs/awareness-days/world-sepsis-day-2025" target="_blank">
+      <em>World Sepsis Day 2025</em>
+    </a> 
+    <a href="https://www.mandatorytraining.co.uk/blogs/awareness-days/world-health-day-2025" target="_blank">
+      <em>World Health Day 2025</em>
+    </a>
+  </div>
+</div>
+
+<!-- REFERENCES AND RESOURCES for tablet-->
+<div class="References-and-resources-section tablet">
+  <!-- LEFT COLUMN (Text heading) -->
+  <div class="text-column">
+    <h3>References &amp; Resources</h3>
+  </div>
+
+  <!-- IMAGE -->
+  <div class="image-column">
+    <img 
+      src="https://cdn.shopify.com/s/files/1/0937/2788/files/What_is_Mandatory_Training_-_Dr_Richard_Dune_cdeb1ba6-ea94-44e7-9c6c-c440eca3a7e8.png?v=1735910533" 
+      alt="Why Organ Donation Week 2025 Matters More Than Ever - The Mandatory Training Group UK -" 
+      title="Why Organ Donation Week 2025 Matters More Than Ever - The Mandatory Training Group UK -">
+  </div>
+
+  <!-- RIGHT COLUMN (Text links) -->
+  <div class="text-column">
+    <a href="https://www.mandatorytraining.co.uk/blogs/awareness-days/mental-health-awareness-week-2025" target="_blank">
+      <em>Mental Health Awareness Week 2025</em>
+    </a> 
+    <a href="https://www.mandatorytraining.co.uk/blogs/awareness-days/world-patient-safety-day-2025" target="_blank">
+      <em>World Patient Safety Day 2025</em>
+    </a> 
+    <a href="https://www.mandatorytraining.co.uk/blogs/awareness-days/world-sepsis-day-2025" target="_blank">
+      <em>World Sepsis Day 2025</em>
+    </a> 
+    <a href="https://www.mandatorytraining.co.uk/blogs/awareness-days/world-health-day-2025" target="_blank">
+      <em>World Health Day 2025</em>
+    </a>
+  </div>
+</div>
