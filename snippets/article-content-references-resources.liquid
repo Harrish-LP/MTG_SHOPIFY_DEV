@@ -95,7 +95,7 @@
     <h3>References &amp; Resources</h3>
     {% if article.metafields.custom.references_and_resources %}
       {% for ref in article.metafields.custom.references_and_resources.value %}
-        <a href="{{ ref }}" target="_blank" rel="noopener">
+        <a href="{{ ref.url }}" target="_blank" rel="noopener">
           <em>{{ ref.title }}</em>
         </a>
       {% endfor %}
