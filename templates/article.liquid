@@ -1,53 +1,63 @@
-<!-- /templates/article.liquid --> 
-{% assign number_of_comments = article.comments_count %}  
- 
+<!-- /templates/article.liquid -->
+{% assign number_of_comments = article.comments_count %}
 
 {% include 'breadcrumb' %}
 <div class="article-container">
-<div class="container">
-  <div class="row">
-    {% if settings.blog_sidebar_position == 'left' %}
-    <div class="col-sm-3 sidebar"> 
-      {% include 'blog-sidebar' %} 
-    </div>
-    {% endif %}
-    <div class="{% if settings.blog_sidebar_position == 'none' %}col-sm-12{% else %}col-sm-9{% endif %}">
-      <div class="blog-wrapper">
-        <div class="postWrapper"> 
-          <div class="postBanner">
-            {{ article.excerpt }}
-          </div>
-          <div class="post-date">
-            <span class="day">{{ article.published_at | date: '%d' }}</span>
-            <span class="month">{{ article.published_at | date: '%b' }}</span>
-          </div>
-          <div class="postTitle">
-            <h2>
-              <a href="{{ article.url }}"> 
-                {% if settings.language_enable %}
-                <span class="lang1">{{ article.title | split: '|' | first }}</span>
-                <span class="lang2">{{ article.title | split: '|' | last }}</span>
-                {% else %}
-                {{ article.title | split: '|' | first }}
-                {% endif %}
-              </a>
-            </h2>   
-            <div class="postDetails">
-              {% capture author %}{{ article.author }}{% endcapture %}
-              
-              {% capture date %}<time datetime='{{ article.published_at | date: '%Y-%m-%d' }}'>{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
-              <span class="blog_author" {% if settings.language_enable %}data-translate="blogs.article.author_on_date_html|date:{{date}},author:{{author}}" translate-item="blog-date-author"{%endif%}>
-                <i class="icon-calendar"></i>
-                {{ 'blogs.article.author_on_date_html' | t: date: date, author: author }}        
-              </span>
-              <span class="blog_author" {% if settings.language_enable %}data-translate="blogs.article.by_admin|author:{{author}}" translate-item="blog-date-author"{%endif%}>
-                <i class="icon-user"></i>
-                {{ 'blogs.article.by_admin' | t: author: author }}        
-              </span>
+  <div class="container">
+    <div class="row">
+      {% if settings.blog_sidebar_position == 'left' %}
+        <div class="col-sm-3 sidebar">
+          {% include 'blog-sidebar' %}
+        </div>
+      {% endif %}
+      <div class="{% if settings.blog_sidebar_position == 'none' %}col-sm-12{% else %}col-sm-9{% endif %}">
+        <div class="blog-wrapper">
+          <div class="postWrapper">
+            <div class="postBanner">
+              {{ article.excerpt }}
             </div>
-          </div> 
-          <div class="postContent"> 
-            {% render 'article-content' %}
+            <div class="post-date">
+              <span class="day">{{ article.published_at | date: '%d' }}</span>
+              <span class="month">{{ article.published_at | date: '%b' }}</span>
+            </div>
+            <div class="postTitle">
+              <h2>
+                <a href="{{ article.url }}">
+                  {% if settings.language_enable %}
+                    <span class="lang1">{{ article.title | split: '|' | first }}</span>
+                    <span class="lang2">{{ article.title | split: '|' | last }}</span>
+                  {% else %}
+                    {{ article.title | split: '|' | first }}
+                  {% endif %}
+                </a>
+              </h2>
+              <div class="postDetails">
+                {% capture author %}{{ article.author }}{% endcapture %}
+
+                {% capture date %}<time datetime='{{ article.published_at | date: '%Y-%m-%d' }}'>{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+                <span
+                  class="blog_author"
+                  {% if settings.language_enable %}
+                    data-translate="blogs.article.author_on_date_html|date:{{date}},author:{{author}}"
+                    translate-item="blog-date-author"
+                  {% endif %}
+                >
+                  <i class="icon-calendar"></i>
+                  {{ 'blogs.article.author_on_date_html' | t: date: date, author: author }}
+                </span>
+                <span
+                  class="blog_author"
+                  {% if settings.language_enable %}
+                    data-translate="blogs.article.by_admin|author:{{author}}" translate-item="blog-date-author"
+                  {% endif %}
+                >
+                  <i class="icon-user"></i>
+                  {{ 'blogs.article.by_admin' | t: author: author }}
+                </span>
+              </div>
+            </div>
+            <div class="postContent">
+              {% render 'article-content' %}
 
               <div class="postDesc">
                 {% if settings.language_enable %}
@@ -57,200 +67,304 @@
                   {{ article.content | split: '[lang2]' | first }}
                 {% endif %}
               </div>
-            {% render 'article-content-references-resources' %}
-            <div class="post-comment"> 
-              {% include 'tags-article' %} 
+              {% render 'article-content-references-resources' %}
+              <div class="post-comment">
+                {% include 'tags-article' %}
 
-              {% if blog.next_article or blog.previous_article %}  
-              <p style="overflow: hidden;">
-                {% if blog.previous_article %}
-                <span class="left"{% if settings.language_enable %} data-translate="blogs.article.older_post|link_to:{{blog.previous_article}}"{%endif%}>
-                  &larr; {{ 'blogs.article.older_post' | t | link_to: blog.previous_article }}
-                </span>
-                {% endif %}
-                {% if blog.next_article %}
-                <span class="right" {% if settings.language_enable %}data-translate="blogs.article.newer_post|link_to:{{blog.next_article}}"{%endif%}>
-                  {{ 'blogs.article.newer_post' | t | link_to: blog.next_article }} &rarr;
-                </span>
-                {% endif %}
-              </p>
-              {% endif %}
-
-              {% if blog.comments_enabled? %} 
-              <h3 class="numb-comments" {% if settings.language_enable %}data-translate="blogs.comments.comments_with_count|count:{{number_of_comments}}"{%endif%}>{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h3> 
-              {% comment %}
-              Just like blog.liquid page, define how many comments should be on each page.
-              {% endcomment %}
-              {% paginate article.comments by 5 %}
-              {% comment %}
-              #Comments is required, it is used as an anchor link by Shopify.
-              {% endcomment %}
-              <div id="Comments">
-
-                {% if comment and comment.created_at %}
-                <p class="note form-success"> 
-                  {% if blog.moderated? %}
-                  <span {% if settings.language_enable %}data-translate="blogs.comments.success_moderated"{%endif%}>{{ 'blogs.comments.success_moderated' | t }}</span>
-                  {% else %}
-                  <span {% if settings.language_enable %}data-translate="blogs.comments.success"{%endif%}>{{ 'blogs.comments.success' | t }}</span>
-                  {% endif %} 
-                </p>
+                {% if blog.next_article or blog.previous_article %}
+                  <p style="overflow: hidden;">
+                    {% if blog.previous_article %}
+                      <span
+                        class="left"
+                        {% if settings.language_enable %}
+                          data-translate="blogs.article.older_post|link_to:{{blog.previous_article}}"
+                        {% endif %}
+                      >
+                        &larr; {{ 'blogs.article.older_post' | t | link_to: blog.previous_article }}
+                      </span>
+                    {% endif %}
+                    {% if blog.next_article %}
+                      <span
+                        class="right"
+                        {% if settings.language_enable %}
+                          data-translate="blogs.article.newer_post|link_to:{{blog.next_article}}"
+                        {% endif %}
+                      >
+                        {{ 'blogs.article.newer_post' | t | link_to: blog.next_article }} &rarr;
+                      </span>
+                    {% endif %}
+                  </p>
                 {% endif %}
 
-                {% if number_of_comments > 0 %}
-                <ul class="no-bullets">
+                {% if blog.comments_enabled? %}
+                  <h3
+                    class="numb-comments"
+                    {% if settings.language_enable %}
+                      data-translate="blogs.comments.comments_with_count|count:{{number_of_comments}}"
+                    {% endif %}
+                  >
+                    {{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}
+                  </h3>
                   {% comment %}
-                  If a comment was just submitted with no blank field, show it.
+                    Just like blog.liquid page, define how many comments should be on each page.
                   {% endcomment %}
+                  {% paginate article.comments by 5 %}
+                    {% comment %}
+                      #Comments is required, it is used as an anchor link by Shopify.
+                    {% endcomment %}
+                    <div id="Comments">
+                      {% if comment and comment.created_at %}
+                        <p class="note form-success">
+                          {% if blog.moderated? %}
+                            <span
+                              {% if settings.language_enable %}
+                                data-translate="blogs.comments.success_moderated"
+                              {% endif %}
+                            >
+                              {{- 'blogs.comments.success_moderated' | t -}}
+                            </span>
+                          {% else %}
+                            <span
+                              {% if settings.language_enable %}
+                                data-translate="blogs.comments.success"
+                              {% endif %}
+                            >
+                              {{- 'blogs.comments.success' | t -}}
+                            </span>
+                          {% endif %}
+                        </p>
+                      {% endif %}
 
-                  {% comment %}
-                  Showing the rest of the comments.
-                  {% endcomment %}
-                  {% for comment in article.comments %}
-                  <li id="{{ comment.id }}" class="comment{% unless number_of_comments > article.comments_count %}{% if forloop.first %} first{% endif %}{% endunless %}{% if forloop.last %} last {% endif %}">
-                    {% include 'comment' %}
-                  </li> 
-                  {% endfor %}
-                </ul>
+                      {% if number_of_comments > 0 %}
+                        <ul class="no-bullets">
+                          {% comment %}
+                            If a comment was just submitted with no blank field, show it.
+                          {% endcomment %}
 
-                {% if paginate.pages > 1 %} 
-                <div class="pagination">
-                  {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
-                </div>
-                {% endif %} 
+                          {% comment %}
+                            Showing the rest of the comments.
+                          {% endcomment %}
+                          {% for comment in article.comments %}
+                            <li
+                              id="{{ comment.id }}"
+                              class="comment{% unless number_of_comments > article.comments_count %}{% if forloop.first %} first{% endif %}{% endunless %}{% if forloop.last %} last {% endif %}"
+                            >
+                              {% include 'comment' %}
+                            </li>
+                          {% endfor %}
+                        </ul>
 
-                {% endif %}
+                        {% if paginate.pages > 1 %}
+                          <div class="pagination">
+                            {{
+                              paginate
+                              | default_pagination
+                              | replace: '&laquo; Previous', '&larr;'
+                              | replace: 'Next &raquo;', '&rarr;'
+                            }}
+                          </div>
+                        {% endif %}
+                      {% endif %}
 
-                {% comment %}
-                Comment submission form
-                {% endcomment %}
-                <div class="form-vertical">
-                  {% form 'new_comment', article %}
+                      {% comment %}
+                        Comment submission form
+                      {% endcomment %}
+                      <div class="form-vertical">
+                        {% form 'new_comment', article %}
+                          {% comment %}
+                            #AddCommentTitle is used simply as an anchor link
+                          {% endcomment %}
+                          <h3
+                            id="AddCommentTitle"
+                            class="numb-comments"
+                            {% if settings.language_enable %}
+                              data-translate="blogs.comments.title"
+                            {% endif %}
+                          >
+                            {{ 'blogs.comments.title' | t }}
+                          </h3>
 
-                  {% comment %}
-                  #AddCommentTitle is used simply as an anchor link
-                  {% endcomment %}
-                  <h3 id="AddCommentTitle" class="numb-comments" {% if settings.language_enable %}data-translate="blogs.comments.title"{%endif%}>{{ 'blogs.comments.title' | t }}</h3>
+                          {{ form.errors | default_errors }}
 
-                  {{ form.errors | default_errors }}
+                          <div class="grid">
+                            <div class="grid__item large--one-half">
+                              {% comment %} <input type="text" name="comment[author]" id="CommentAuthor" class="input-full{% if form.errors contains 'author' %} error{% endif %}" value="{{ form.author }}" placeholder="{{ 'blogs.comments.name' | t }}" autocapitalize="words"> ORGINAL INPUT FOR NAME {% endcomment %}
+                              <input
+                                type="text"
+                                name="comment[author]"
+                                id="CommentAuthor"
+                                class="blog-input-name-cust input-full{% if form.errors contains 'author' %} error{% endif %}"
+                                value="{{ form.author }}"
+                                placeholder="Full Name"
+                                autocapitalize="words"
+                              >
+                              <!-- CUSTOMIZED INPUT FOR NAME THIS WAS ADDED -->
+                              <input
+                                type="email"
+                                name="comment[email]"
+                                id="CommentEmail"
+                                class="blog-input-email-cust input-full{% if form.errors contains 'email' %} error{% endif %}"
+                                value="{{ form.email }}"
+                                placeholder="{{ 'blogs.comments.email' | t }}"
+                                autocorrect="off"
+                                autocapitalize="off"
+                              >
+                            </div>
 
-                  <div class="grid">
+                            <div class="grid__item large--one-half">
+                              {% comment %} <textarea name="comment[body]" id="CommentBody" class="input-full{% if form.errors contains 'body' %} error{% endif %}" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea> Orginal {% endcomment %}
+                              <textarea
+                                name="comment[body]"
+                                id="CommentBody"
+                                class="blog-input-comment-textarea-cust input-full{% if form.errors contains 'body' %} error{% endif %}"
+                                placeholder="What did you think fro this blog? Share your thoughts with us..."
+                              >{{ form.body }}</textarea>
+                              <!-- CUSTOMIZED -->
+                            </div>
+                          </div>
 
-                    <div class="grid__item large--one-half"> 
-                      {% comment %} <input type="text" name="comment[author]" id="CommentAuthor" class="input-full{% if form.errors contains 'author' %} error{% endif %}" value="{{ form.author }}" placeholder="{{ 'blogs.comments.name' | t }}" autocapitalize="words"> ORGINAL INPUT FOR NAME {% endcomment %}
-                        <input type="text" name="comment[author]" id="CommentAuthor" class="blog-input-name-cust input-full{% if form.errors contains 'author' %} error{% endif %}" value="{{ form.author }}" placeholder="Full Name" autocapitalize="words"> <!-- CUSTOMIZED INPUT FOR NAME THIS WAS ADDED-->
-                      <input type="email" name="comment[email]" id="CommentEmail" class="blog-input-email-cust input-full{% if form.errors contains 'email' %} error{% endif %}" value="{{ form.email }}" placeholder="{{ 'blogs.comments.email' | t }}" autocorrect="off" autocapitalize="off">
-                      
+                          {% if blog.moderated? %}
+                            <p
+                              {% if settings.language_enable %}
+                                data-translate="blogs.comments.moderated"
+                              {% endif %}
+                            >
+                              {{ 'blogs.comments.moderated' | t }}
+                            </p>
+                          {% endif %}
+
+                          <div class="submit-btn-comment-con">
+                            <input
+                              type="submit"
+                              class="btn-button bordered"
+                              {% if settings.language_enable %}
+                                data-translate="blogs.comments.post"
+                              {% endif %}
+                              value="{{ 'blogs.comments.post' | t }}"
+                            >
+                          </div>
+
+                          {% comment %}
+                            Assign variable to be used after timber.init() is run in theme.liquid
+                          {% endcomment %}
+                          {% if form.errors %}
+                            {% assign newHash = 'AddCommentTitle' %}
+                          {% endif %}
+
+                          {% if form.posted_successfully? %}
+                            {% assign newHash = 'Comments' %}
+                          {% endif %}
+                        {% endform %}
+                      </div>
                     </div>
-
-                    <div class="grid__item large--one-half"> 
-                      {% comment %} <textarea name="comment[body]" id="CommentBody" class="input-full{% if form.errors contains 'body' %} error{% endif %}" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea> Orginal {% endcomment %}
-                       <textarea name="comment[body]" id="CommentBody" class="blog-input-comment-textarea-cust input-full{% if form.errors contains 'body' %} error{% endif %}" placeholder="What did you think fro this blog? Share your thoughts with us...">{{ form.body }}</textarea> <!-- CUSTOMIZED -->
-                    </div>
-
-                  </div>
-
-                  {% if blog.moderated? %}
-                  <p {% if settings.language_enable %}data-translate="blogs.comments.moderated"{%endif%}>{{ 'blogs.comments.moderated' | t }}</p>
-                  {% endif %}
-
-                  <div class="submit-btn-comment-con"><input type="submit" class="btn-button bordered" {% if settings.language_enable %}data-translate="blogs.comments.post"{%endif%} value="{{ 'blogs.comments.post' | t }}"></div>
-
-                  {% comment %}
-                  Assign variable to be used after timber.init() is run in theme.liquid
-                  {% endcomment %}
-                  {% if form.errors %}
-                  {% assign newHash = 'AddCommentTitle' %}
-                  {% endif %}
-
-                  {% if form.posted_successfully? %}
-                  {% assign newHash = 'Comments' %}
-                  {% endif %}
-
-                  {% endform %}
-                </div>
-
+                  {% endpaginate %}
+                {% endif %}
               </div>
-              {% endpaginate %}
-              {% endif %}
-            </div> 
-          </div>   
+            </div>
+          </div>
         </div>
       </div>
+      {% if settings.blog_sidebar_position == 'right' %}
+        <div class="col-sm-3 sidebar">
+          {% include 'blog-sidebar' %}
+        </div>
+      {% endif %}
     </div>
-    {% if settings.blog_sidebar_position == 'right' %}
-    <div class="col-sm-3 sidebar"> 
-      {% include 'blog-sidebar' %} 
-    </div>
-    {% endif %}
   </div>
 </div>
-</div>
-
 
 <style>
-  form#comment_form{
-      padding: 30px;
-    background: #05284C;
+  form#comment_form {
+    padding: 30px;
+    background: #05284c;
     color: white;
     border-radius: 30px;
     margin-top: 20px;
   }
 
-  .blog-input-name-cust::placeholder,.blog-input-email-cust::placeholder, .blog-input-comment-textarea-cust::placeholder{
-  font-size: 14px;
+  .blog-input-name-cust::placeholder,
+  .blog-input-email-cust::placeholder,
+  .blog-input-comment-textarea-cust::placeholder {
+    font-size: 14px;
   }
-  .submit-btn-comment-con{
-  display: flex;
-  justify-content: end;
+  .submit-btn-comment-con {
+    display: flex;
+    justify-content: end;
   }
-  .btn-button.bordered{
-  background: #00af52;
-  border-radius: 30px;
-  }
-
-  h3.numb-comments{
-  margin-bottom: 16px;
-  font-size: 20px;
+  .btn-button.bordered {
+    background: #00af52;
+    border-radius: 30px;
   }
 
-  .post-comment{
-  padding: 0px 10px;
+  h3.numb-comments {
+    margin-bottom: 16px;
+    font-size: 20px;
   }
 
+  .post-comment {
+    padding: 0px 10px;
+  }
 
   /* SINGULAR BLOG POST CUSTOMIZATION AND RESPONSIVENESS*/
-.template-article .blog-wrapper .postWrapper .postDesc{
+  .template-article .blog-wrapper .postWrapper .postDesc {
     padding: 0px 0px 0px 0 !important;
-}
-.postDesc h2 {
-    color: #05284C;
+  }
+  .postDesc h2 {
+    color: #05284c;
     font-size: clamp(20px, 2vw, 32px);
     font-weight: bold;
     font-family: 'Montserrat';
     margin: 20px 0px;
-}
+  }
 
-.postDesc p {
+  .postDesc p {
     line-height: normal !important;
-    font-size: 16px !important;
-}
-
-    @media screen and (max-width: 991px) {
-  .template-article .blog-wrapper .postWrapper .postDesc{
-   padding: 0 !important; 
+    font-size: 16px;
   }
-}
 
-    @media screen and (max-width: 767px) {
-  .col-sm-9{
-   padding: 0 !important; 
+  @media screen and (max-width: 320px) {
   }
-}
 
-    @media screen and (max-width: 575px) {
- .template-article .blog-wrapper .postWrapper .postDesc, .main-container .blog-wrapper .postWrapper{
-   padding: 10px !important; 
+  @media screen and (max-width: 460px) {
   }
-}
+
+  @media screen and (max-width: 480px) {
+      .postDesc p {
+    font-size: 14px;
+  }
+  }
+
+  @media screen and (max-width: 530px) {
+  }
+
+  @media screen and (max-width: 575px) {
+    .template-article .blog-wrapper .postWrapper .postDesc,
+    .main-container .blog-wrapper .postWrapper {
+      padding: 10px !important;
+    }
+  }
+
+  @media screen and (max-width: 620px) {
+  }
+
+  @media screen and (max-width: 767px) {
+    .col-sm-9 {
+      padding: 0 !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+  }
+
+  @media screen and (max-width: 991px) {
+    .template-article .blog-wrapper .postWrapper .postDesc {
+      padding: 0 !important;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+  }
+
+  @media screen and (max-width: 1440px) {
+  }
 </style>
