@@ -1,0 +1,5 @@
+# Ignore specific folders in the root
+/assets/
+/sections/
+/snippets/
+/templates/
