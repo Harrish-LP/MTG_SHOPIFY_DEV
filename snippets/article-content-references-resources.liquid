@@ -144,8 +144,9 @@
   <div class="image-column">
     {% if article.metafields.custom.author_img %}
       <img
-        src="{{ article.metafields.custom.author_img | image_url }}"
-        alt="{{ article.metafields.custom.author_img.alt | escape }}"
+        src="{{ article.metafields.custom.author_img | image_url: width: 200 }}"
+        alt="{{ article.metafields.custom.author_image_alt_title | default: article.metafields.custom.author_img.alt | escape }}"
+        title="{{ article.metafields.custom.author_image_alt_title | default: article.metafields.custom.author_img.alt | escape }}"
         loading="lazy"
       >
     {% endif %}
