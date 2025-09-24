@@ -182,6 +182,10 @@
   </div>
 </div>
 
-<div class="blog-h2-after-Banner" style="display: flex; align-items: center; justify-content: center;">
-  <h2 style="font-size: 18px; font-family: 'Open Sans'; font-style: italic; color: #05284c; margin: 30px 0; font-weight: 700;">this is a test and for demonstration</h2>
-</div>
+{% if article.metafields.custom.sub_heading_after_banner %}
+  <div class="blog-h2-after-Banner" style="display: flex; align-items: center; justify-content: center;">
+    <h2 style="font-size: 18px; font-family: 'Open Sans'; font-style: italic; color: #05284c; margin: 30px 0; font-weight: 700;">
+      {{ article.metafields.custom.sub_heading_after_banner }}
+    </h2>
+  </div>
+{% endif %}
