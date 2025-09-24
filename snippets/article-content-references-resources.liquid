@@ -94,7 +94,6 @@
   <div class="text-column">
     <h3>References &amp; Resources</h3>
     {% if article.metafields.custom.references_and_resources %}
-      <h3>References & Resources</h3>
       {% for ref in article.metafields.custom.references_and_resources.value %}
         <a href="{{ ref.url }}" target="_blank" rel="noopener">
           <em>{{ ref.text }}</em>
