@@ -10,7 +10,7 @@
     align-items: center;
     background-color: #212b4b;
     border-radius: 25px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     overflow: hidden;
   }
 
@@ -32,7 +32,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.25); /* dark overlay for readability */
+    background: rgba(0, 0, 0, 0.25); /* dark overlay for readability */
     border-radius: 15px;
   }
 
@@ -48,12 +48,12 @@
     background-color: rgba(255, 255, 255, 0.85);
     border-radius: 15px;
     color: #212b4b;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   }
 
   /* Author & Date */
   .author-date {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     font-size: clamp(10px, 1vw, 13px);
     color: white;
@@ -66,7 +66,7 @@
   /* Image Credit */
   .image-credit {
     margin-top: 10px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     font-size: clamp(10px, 1vw, 13px);
     color: white;
@@ -101,17 +101,19 @@
 <!-- IMPROVED BANNER HTML -->
 <div class="box-container">
   <div style="margin-bottom: 10px;">
+    <span class="author-date"> <i style="color: #00af52;" class="fas fa-user"></i>{{ article.author }} </span>
     <span class="author-date">
-      <i style="color: #00af52;" class="fas fa-user"></i>{{ article.author }}
-    </span>
-    <span class="author-date">
-      <i style="color: #00af52;" class="fas fa-calendar"></i>13-09-2025
+      <i style="color: #00af52;" class="fas fa-calendar"></i>
+      {% if article.metafields.custom.blog_date %}
+        {{ article.metafields.custom.blog_date | date: '%d-%m-%Y' }}
+      {% endif %}
     </span>
   </div>
 
   <div class="blog-image" style="background-image: url('{{ article.image | image_url: width: 1600 }}');">
-    <div class="white-container"><h1 class="article-title">{{ article.title }}</h1>
-</div>
+    <div class="white-container">
+      <h1 class="article-title">{{ article.title }}</h1>
+    </div>
   </div>
 
   <div class="image-credit">
