@@ -117,6 +117,10 @@
   </div>
 
   <div class="image-credit">
-    <span>Image by Benji Banana via Envato Elements</span>
+    <span>
+      {%- if article.metafields.custom.img_credits %}
+        {{ article.metafields.custom.img_credits }}
+      {% endif %}
+    </span>
   </div>
 </div>
