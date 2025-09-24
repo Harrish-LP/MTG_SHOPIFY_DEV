@@ -138,10 +138,9 @@
   <div class="article-references">
     <h3>References & Resources</h3>
     {% for ref in article.metafields.custom.references_and_resources.value %}
-      <a href="{{ ref.url | default: ref }}" target="_blank" rel="noopener">
-        <em>{{ ref.title | default: ref }}</em>
+      <a href="{{ ref.url }}" target="_blank" rel="noopener">
+        <em>{{ ref.text }}</em>
       </a>
     {% endfor %}
   </div>
 {% endif %}
-
