@@ -142,11 +142,13 @@
 
   <!-- RIGHT COLUMN (Image) -->
   <div class="image-column">
-    <img
-      src="https://cdn.shopify.com/s/files/1/0937/2788/files/Anna_Nova.png?v=1747905988"
-      alt="Organ Donation Week 2025: Raising Awareness and Saving Lives - The Mandatory Training Group UK -"
-      title="Organ Donation Week 2025: Raising Awareness and Saving Lives - The Mandatory Training Group UK -"
-    >
+    {% if article.metafields.custom.author_img %}
+      <img
+        src="{{ article.metafields.custom.author_img | image_url }}"
+        alt="{{ article.metafields.custom.author_img.alt | escape }}"
+        loading="lazy"
+      >
+    {% endif %}
   </div>
 </div>
 
