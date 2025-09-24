@@ -57,6 +57,7 @@
                   {{ article.content | split: '[lang2]' | first }}
                 {% endif %}
               </div>
+            {% render 'article-content-references-resources' %}
             <div class="post-comment"> 
               {% include 'tags-article' %} 
 
