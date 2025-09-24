@@ -84,11 +84,13 @@
 <!-- ====== References & Resources (Desktop) ====== -->
 <div class="references-section desktop">
   <div class="image-column">
-    <img
-      src="https://cdn.shopify.com/s/files/1/0937/2788/files/What_is_Mandatory_Training_-_Dr_Richard_Dune_cdeb1ba6-ea94-44e7-9c6c-c440eca3a7e8.png?v=1735910533"
-      alt="Why Organ Donation Week 2025 Matters More Than Ever - The Mandatory Training Group UK -"
-      title="Why Organ Donation Week 2025 Matters More Than Ever - The Mandatory Training Group UK -"
-    >
+    {% if article.metafields.custom.ref_res_alt_text_and_title %}
+      <img
+        src="https://cdn.shopify.com/s/files/1/0937/2788/files/What_is_Mandatory_Training_-_Dr_Richard_Dune_cdeb1ba6-ea94-44e7-9c6c-c440eca3a7e8.png?v=1735910533"
+        alt="{{ article.metafields.custom.ref_res_alt_text_and_title | escape }}"
+        title="{{ article.metafields.custom.ref_res_alt_text_and_title | escape }}"
+      >
+    {% endif %}
   </div>
 
   <div class="text-column">
@@ -119,7 +121,7 @@
     {% endif %}
   </div>
 
-  
+
   <div class="text-column">
     {% if article.metafields.custom.references_and_resources %}
       {% for ref in article.metafields.custom.references_and_resources.value %}
