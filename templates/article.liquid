@@ -47,14 +47,16 @@
             </div>
           </div> 
           <div class="postContent"> 
-            <div class="postDesc">
-              {% if settings.language_enable %}
-              <div class="lang1">{{ article.content | split: '[lang2]' | first }}</div>
-              <div class="lang2">{{ article.content | split: '[lang2]' | last }}</div>
-              {% else %}
-              {{ article.content | split: '[lang2]' | first }}
-              {% endif %} 
-            </div> 
+            {% render 'article-content' %}
+
+              <div class="postDesc">
+                {% if settings.language_enable %}
+                  <div class="lang1">{{ article.content | split: '[lang2]' | first }}</div>
+                  <div class="lang2">{{ article.content | split: '[lang2]' | last }}</div>
+                {% else %}
+                  {{ article.content | split: '[lang2]' | first }}
+                {% endif %}
+              </div>
             <div class="post-comment"> 
               {% include 'tags-article' %} 
 
