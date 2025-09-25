@@ -121,7 +121,6 @@
     {% endif %}
   </div>
 
-
   <div class="text-column">
     {% if article.metafields.custom.references_and_resources %}
       {% for ref in article.metafields.custom.references_and_resources.value %}
@@ -138,9 +137,9 @@
   <div class="text-column">
     <h3><span style="color: #05284C;">About the author</span></h3>
     <h4>{{ article.author }}</h4>
-    <p>
+    <p class="author-desc">
       {% if article.metafields.custom.author_description %}
-        {{ article.metafields.custom.author_description }}
+        {{ article.metafields.custom.author_description | metafield_tag }}
       {% endif %}
     </p>
   </div>
@@ -149,7 +148,7 @@
   <div class="image-column">
     {% if article.metafields.custom.author_img %}
       <img
-        src="{{ article.metafields.custom.author_img | image_url: width: 200 }}"
+        src="{{ article.metafields.custom.author_img | image_url}}"
         alt="{{ article.metafields.custom.author_image_alt_title | default: article.metafields.custom.author_img.alt | escape }}"
         title="{{ article.metafields.custom.author_image_alt_title | default: article.metafields.custom.author_img.alt | escape }}"
         loading="lazy"
@@ -196,11 +195,25 @@
     color: #05284C;
   }
 
-  .About-author-section .text-column p {
+  .About-author-section .text-column .author-desc {
     font-size: 16px;
     line-height: 1.6;
     color: #05284C;
   }
+
+  .About-author-section .metafield-rich_text_field p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #2b2b2d;
+  }
+
+  .About-author-section .metafield-rich_text_field p a {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4A90E2;
+  }
+
+
 
   .About-author-section .image-column {
     flex: 0 0 35%;
@@ -222,5 +235,37 @@
       flex-direction: column;
       gap: 25px;
     }
+  }
+</style>
+
+<!-- CONTACT US FORM -->
+<h2 class="blog-heading-h2" style="text-align: center;">Contact us</h2>
+<div class="blog-text">
+  <p dir="ltr" style="text-align: center;">Complete the form below to start your ComplyPlus<sup>TM</sup> trial and</p>
+  <p dir="ltr" style="text-align: center;">transform your regulatory compliance solutions.</p>
+  <div id="94b83643_1752482296" class="powr-form-builder"></div>
+  <script src="https://www.powr.io/powr.js?platform=shopify"></script>
+  <p>&nbsp;</p>
+</div>
+
+<style>
+      /* Blog heading for sections like Contact Us */
+  .blog-heading-h2 {
+    margin: 20px 0;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: normal;
+    color: #212b4b;
+    text-align: left; /* can be overridden inline as center */
+  }
+
+  /* Blog text content */
+  .blog-text {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    text-align: center; /* for this section */
   }
 </style>
